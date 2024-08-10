@@ -34,7 +34,25 @@ else()
   set(${MODULE_NAME}_LIB_TYPE STATIC)
 endif()
 
-add_library(${MODULE_NAME} ${${MODULE_NAME}_LIB_TYPE})
+file(GLOB_RECURSE ${MODULE_NAME}_HEADERS
+    CONFIGURE_DEPENDS
+    "include/*.h" "include/*.hpp"
+    "include/*.inl" "include/*.tcc"
+)
+
+file(GLOB_RECURSE ${MODULE_NAME}_SOURCES
+    CONFIGURE_DEPENDS
+    "src/*.cc" "src/*.cpp" "src/*.c"
+    "src/*.h" "src/*.hpp"
+    "src/*.inl" "src/*.tcc"
+)
+
+add_library(
+  ${MODULE_NAME}
+  ${${MODULE_NAME}_LIB_TYPE}
+  ${${MODULE_NAME}_HEADERS}
+  ${${MODULE_NAME}_SOURCES}
+)
 
 target_include_directories(
   ${MODULE_NAME}
@@ -45,11 +63,17 @@ target_include_directories(
 add_library(${MODULE_NS}::${MODULE_NAME} ALIAS ${MODULE_NAME})
 message(STATUS "Build `${${MODULE_NAME}_LIB_TYPE}` library `${MODULE_NS}::${MODULE_NAME}`")
 
+# ==================================================
+# Project development environment 
 
+if(${PROJECT_NAME}_IS_MAIN)
+  # Main
+  add_subdirectory(main)
+endif()
 
-file(GLOB children LIST_DIRECTORIES true "*")
-foreach(child IN LISTS children)
-	message("${child}")
-endforeach()
+#file(GLOB children LIST_DIRECTORIES true "*")
+#foreach(child IN LISTS children)
+#	message("${child}")
+#endforeach()
 
 
