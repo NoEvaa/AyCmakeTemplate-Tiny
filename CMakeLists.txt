@@ -27,8 +27,7 @@ include(cmake/Init.cmake)
 
 # ==================================================
 # Module library
-
-if(${${MODULE_NAME}_BUILD_SHARED})
+if(${PROJECT_NAME}_BUILD_SHARED)
   set(${MODULE_NAME}_LIB_TYPE SHARED)
 else()
   set(${MODULE_NAME}_LIB_TYPE STATIC)
