@@ -2,9 +2,9 @@
 # 
 
 file(
-  GLOB
-  ${PROJECT_NAME}_MAIN_FILES
-  *.cc *.cpp *.c
+    GLOB
+    ${PROJECT_NAME}_MAIN_FILES
+    *.cc *.cpp *.c
 )
 
 add_executable(${PROJECT_NAME}_main ${${PROJECT_NAME}_MAIN_FILES})
