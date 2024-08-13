@@ -70,9 +70,3 @@ if(${PROJECT_NAME}_IS_MAIN)
     add_subdirectory(main)
 endif()
 
-#file(GLOB children LIST_DIRECTORIES true "*")
-#foreach(child IN LISTS children)
-#	message("${child}")
-#endforeach()
-
-
